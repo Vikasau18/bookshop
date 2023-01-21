@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+<div id="loading"></div>
+
+
+<p class="page">Use this page to detail your site's privacy policy.</p>
+
+
+<script>
+    function onReady(callback) {
+        var intervalId = window.setInterval(function () {
+            if (document.getElementsByTagName('body')[0] !== undefined) {
+                window.clearInterval(intervalId);
+                callback.call(this);
+            }
+        }, 1000);
+    }
+
+    function setVisible(selector, visible) {
+        document.querySelector(selector).style.display = visible ? 'block' : 'none';
+    }
+
+    onReady(function () {
+        setVisible('.page', true);
+        setVisible('#loading', false);
+    });
+</script>
+
+<style>
+    /* body {
+            background: #FFF url("https://i.imgur.com/KheAuef.png") top left repeat-x;
+            font-family: 'Alex Brush', cursive !important;
+        }*/
+
+
+    #loading {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(192, 192, 192, 0.5); /*        background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+
+    */
+        background-image: url("https://media.giphy.com/media/3ohzdOrcdpiD26TPt6/giphy.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+<img src="~/Tomato animated.gif" />
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").hide();
+            $("#btn").click(function () {
+                $(this).hide();
+                $("#btn1").show();
+                $("#waitttAmazingLover").css("display", "block");
+            });
+            $("#btn1").click(function () {
+                $(this).hide();
+                $("#btn").show();
+                $("#waitttAmazingLover").css("display", "none");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="waitttAmazingLover" style="color: deepskyblue;display: none;position:absolute;top:24%;left:13%;padding:2px;text-align: center;width: 242px;">
+        <img src="https://www.w3schools.com/jquery/demo_wait.gif" width="64" height="64"><br>Waiting..
+    </div>
+    <div class="">
+        <div><button id="btn" type="button" name="submit">Show Processing</button><button style="" id="btn1" type="button" name="submit">Hide Processing</button></div>
+
+    </div>
+</body>
+</html>

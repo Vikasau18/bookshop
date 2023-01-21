@@ -1,0 +1,78 @@
+﻿@*@model IEnumerable<BookShopping_Project.Models.Product>*@
+@model eshop.Models.ViewModels.Myproductvm
+@*<div class="form-group row bg-dark ">
+        @foreach (var Product in Model)
+        {
+            <div class="col-4">
+                <div class="row p-2">
+                    <div class="col-11  p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                        <div class="card" style="border:0px;">
+                            <img src="@Product.ImageUrl" class="card-img-top rounded" />
+                            <div class="pl-1">
+                                <p class="card-title h5"><b style="color:#2c3e50">@Product.Title</b></p>
+                                <p class="card-title text-primary">by <b>@Product.Author</b></p>
+                            </div>
+                            <div style="padding-left:5px;">
+                                <p>List Price: <strike><b class="">$@Product.ListPrice.ToString("0.00")</b></strike></p>
+                            </div>
+                            <div style="padding-left:5px;">
+                                <p style="color:maroon">As low as: <b class="">$@Product.Price100.ToString("0.00")</b></p>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@Product.Id">ADD TO CART</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@
+
+
+<section style="        background-color: #ffffff;">
+    <div class="container">
+        <form method="get" action="@Url.Action("Index", "Home")">
+            <div class="form-group m-5">
+
+                @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList, "Select Category", new { @class = "form-control" })
+                <br />
+                <button type="submit" class="btn btn-danger">Filter</button>
+            </div>
+        </form>
+
+        <div class="row">
+
+
+            @foreach (var Product in Model.ProductList)
+            {
+
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-25 border-0   bg-white rounded" style="width:87%">
+                        <div class="bg-image hover-zoom ripple  bg-white " style="border-radius:20px;" data-mdb-ripple-color="light">
+                            <img src="@Product.ImageUrl" height=250 class="" style="border-radius:20px;" />
+
+                        </div>
+                        <div class="card-body text-center " style="height:7%;">
+                            <div class="pl-0">
+                                <p class="card-title h5"><b style="color:#2c3e50">@Product.Title</b></p>
+                            </div>
+
+                            <div style="padding-left:;margin-top:0px">
+                                <h>List Price: <strike><b class="">$@Product.ListPrice.ToString("0.00")</b></strike></h>
+                            </div>
+                            <div style="padding-left:;">
+                                <p style="color:">As low as: <b class="">$@Product.Price100.ToString("0.00")</b></p>
+                            </div>
+                            <div>
+                                <a asp-action="Details" class="btn btn-outline-dark" asp-route-id="@Product.Id">Read more</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+        </div>
+
+
+    </div>
+</section>

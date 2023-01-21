@@ -1,0 +1,41 @@
+﻿@model BookShopping_Project.Models.CoverType
+@{
+    var title = (Model.Id == 0 ? "New CoverType" : "Edit CoverType");
+}
+<br />
+<form method="post">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="table-bordered col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class=" text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row p-2 m-2">
+                <div class="col-8 offset-4">
+                    @if (Model.Id == 0)
+                    {
+                        <partial name="_CreateAndBackToListButton" />
+                    }
+                    else
+                    {
+                        <partial name="_EditAndBackToListButton" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

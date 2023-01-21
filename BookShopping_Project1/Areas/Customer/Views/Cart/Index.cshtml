@@ -1,0 +1,271 @@
+﻿@model BookShopping_Project.Models.ViewModels.ShoppingCartVm
+@using BookShopping_Project.Utility
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor httpContextAccessor
+
+
+<div class="notification alert alert-dismissible  fade show text-dark d-flex align-items-center my-3 text-justify" role="alert">
+    <span class="far fa-bell pr-2"></span> You've got
+    @{
+        var count = httpContextAccessor.HttpContext.Session.GetInt32(SD.Ss_session);
+    }
+    &nbsp;(@count)
+    new items on your list check it out!
+    <button type="button" class="btn-danger  ml-auto" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true"> Ok, Thanks </span> </button>
+</div>
+@*<form method="post">
+    <br />
+    @if (Model.ListCart.Count() > 0)
+    {
+        <div class="backgroundWhiteBorder">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0 row container">
+                        <div class="col-6">
+                            <i class="fa fa-shopping-cart"></i> &nbsp;
+                            Shopping Cart
+                        </div>
+                        <div class="col-6 text-right">
+                            <a class="btn btn-outline-info btn-sm" asp-action="Index" asp-controller="Home">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.ListCart)
+                        {
+                            var amount = (item.Price * item.Count);
+                            <div class="row">
+                                <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                    <img src=@item.Product.ImageUrl class="rounded" width="100%" />
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-6 text-lg-left">
+                                    <h5><strong>@item.Product.Title</strong></h5>
+                                    <p><small>@item.Product.Discription</small></p>
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+                                    <div class="col-4 text-md-right" style="padding-top:5px;">
+                                        <h6><strong>@item.Price <span class="text-muted">x</span> @item.Count </strong>=@amount</h6>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-lg-6">
+                                        <div class="float-right mx-1">
+                                            <a asp-action="Plus" asp-route-cartid="@item.Id" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <div class="float-right mx-1">
+                                            <a asp-action="Minus" asp-route-id="@item.Id" class="btn btn-danger">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-sm-4 col-lg-2 text-right">
+                                        <a asp-action="Remove" asp-route-cartid="@item.Id" class="btn btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <strong class="text-info">
+                                            TOTAL :
+                                            <span id="txtOrderTotal">
+                                                $
+                                                <span class="text-info" id="txtOrderTotal"> @Model.OrderHeader.OrderTotal</span>
+                                            </span>
+                                        </strong>
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer row">
+
+                            <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+
+                                <a class="btn btn-info form-control" asp-action="Summary" asp-area="Customer" asp-controller="Cart">Summary</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>No item in the Cart</h2>}
+
+</form>*@
+<form method="post">
+    @if (Model.ListCart.Count() > 0)
+
+    {
+        <section class="h-100 gradient-custom">
+            <div class="container py-3">
+                <div class="card-header  text-light ml-0 row container">
+                    <div class="col-6">
+                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                        Shopping Cart
+                    </div>
+                    <div class="col-6 text-right text-white">
+                        <a asp-action="Index"  asp-controller="Home" class=" text-white"><i
+                          class="fas fa-long-arrow-alt-left me-2 text-white"></i>&nbsp;Back to shop</a>
+                    </div>
+                </div>
+
+
+
+                <div class="row d-flex justify-content-center my-4">
+
+
+                    <div class="col-md-8">
+                      
+                        <div class="card mb-4">
+                            @foreach (var item in Model.ListCart)
+                            {
+                                var amount = (item.Price * item.Count);
+                             
+                                <div class="card-body">
+                                    <!-- Single item -->
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <!-- Image -->
+                                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                                <img src="@item.Product.ImageUrl"
+                                                     class="w-100" />
+                                             
+                                            </div>
+                                            <!-- Image -->
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                            <!-- Data -->
+                                            <p><strong>@item.Product.Title</strong></p>
+                                            <h5><strong>@item.Product.Title</strong></h5>
+                                            <p><small>@item.Product.Discription</small></p>
+                                         
+
+                                            <!-- Data -->
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                            <!-- Quantity -->
+                                            <div class="d-flex flex-row">
+                                                <div class="float-right mx-1">
+
+                                                    <button class="btn btn-link px-2"
+                                                            asp-action="Minus" asp-route-cartid="@item.Id">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                                <input id="form1" min="0" name="quantity" value="@item.Count" type="number"
+                                                       class="form-control form-control-sm" style="width: 50px;" />
+                                                <div class="float-right mx-1">
+                                                    <button class="btn btn-link px-2"
+                                                            asp-action="Plus" asp-route-cartid="@item.Id">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                </div>
+                                                <a asp-action="Remove" asp-route-cartid="@item.Id" class="btn btn-danger btn-sm mb-2">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+
+
+
+
+                                            </div>
+                                            <!-- Quantity -->
+                                            <!-- Price -->
+                                            <p class="mx-4 p-2 m-2 ">
+                                                <h6><strong>@item.Price <span class="text-muted">x</span> @item.Count </strong>=$@amount</h6>
+                                            </p>
+                                            <!-- Price -->
+                                          
+                                        </div>
+                                    </div>
+                                    <!-- Single item -->
+
+                                    <hr class="my-4" />
+
+                                    <!-- Single item -->
+                                    <!-- Single item -->
+                                </div>
+                            }
+                            </div>
+                        
+
+                        <div class="card mb-4 mb-lg-0">
+                            <div class="card-body">
+                                <p><strong>We accept</strong></p>
+                                <img class="me-2" width="45px"
+                                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                     alt="Visa" />
+                                <img class="me-2" width="45px"
+                                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                     alt="American Express" />
+                                <img class="me-2" width="45px"
+                                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                     alt="Mastercard" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header py-3">
+                                <h5 class="mb-0">Total</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                  
+                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                        <div>
+                                            <strong>
+                                                <p class="mb-0">(including VAT)</p>
+                                            </strong>
+                                        </div>
+                                        <span><strong>$@Model.OrderHeader.OrderTotal</strong></span>
+                                    </li>
+                                </ul>
+
+                                <a type="button" class="btn btn-primary btn-lg btn-block" asp-action="Summary" asp-area="Customer" asp-controller="Cart">
+                                    Go to checkout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    }
+    else
+    {
+        <h2>No item in the Cart</h2>
+    }
+
+</form>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+        }
+    </style>
